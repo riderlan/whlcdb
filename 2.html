@@ -1,0 +1,84 @@
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>古诗抽签</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url('https://img1.baidu.com/it/u=3074158085,1509709249&fm=253&fmt=auto&app=138&f=JPEG');
+        background-size: cover;
+        background-position: center;
+        font-family: 'KaiTi', cursive;
+        color: #fff;
+        text-align: center;
+    }
+    #container {
+        margin-top: 100px;
+    }
+    button {
+        padding: 12px 30px;
+        font-size: 20px;
+        background-color: rgba(0,0,0,0.5);
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 12px;
+        margin: 10px;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: rgba(0,0,0,0.7);
+    }
+    #poem {
+        margin-top: 50px;
+        font-size: 28px;
+        background-color: rgba(0,0,0,0.4);
+        padding: 20px;
+        border-radius: 15px;
+        display: inline-block;
+        min-width: 300px;
+    }
+</style>
+</head>
+<body>
+<audio id="bgm" src="https://music.163.com/song/media/outer/url?id=447925558.mp3" autoplay loop></audio>
+<div id="container">
+    <button id="startStopBtn" onclick="toggleDraw()">开始抽签</button>
+    <div id="poem">等待抽签...</div>
+</div>
+
+<script>
+const poems = [
+    "静夜思", "登鹳雀楼", "春晓", "夜泊牛渚怀古", "赋得古原草送别",
+    "次北固山下", "早发白帝城", "望庐山瀑布", "枫桥夜泊", "泊船瓜洲",
+    "题都城南庄", "江南逢李龟年", "登高", "月下独酌", "饮酒",
+    "游子吟", "清明", "秋夕", "宿建德江", "山居秋暝",
+    "凉州词", "夜雨寄北", "渡汉江"
+];
+
+let interval;
+let isDrawing = false;
+
+function toggleDraw() {
+    const btn = document.getElementById('startStopBtn');
+    const poemDiv = document.getElementById('poem');
+
+    if (!isDrawing) {
+        isDrawing = true;
+        btn.innerText = '停止抽签';
+        interval = setInterval(() => {
+            const index = Math.floor(Math.random() * poems.length);
+            poemDiv.innerText = poems[index];
+        }, 300);
+    } else {
+        isDrawing = false;
+        clearInterval(interval);
+        btn.innerText = '开始抽签';
+        poemDiv.innerText = "文慧蠢驴拉屎记\n文慧蠢吕拉屎奇丑臭无比 其爱吃多吃 下次注意 妙哉秒哉 歌以咏志";
+    }
+}
+</script>
+
+</body>
+</html>
